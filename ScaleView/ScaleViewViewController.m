@@ -58,44 +58,88 @@ static inline double radians(float degrees) {
 - (void)viewDidUnload {
   
   [self.customView removeFromSuperview];
-
-  self.customView = nil;
-  self.btn        = nil;
-  self.orig       = nil;
+  [self.containerSubview removeFromSuperview];
+  
+  self.containerSubview = nil;
+  self.customView       = nil;
+  self.btn              = nil;
+  self.orig             = nil;
   
   [super viewDidUnload];
 }
 
 - (IBAction)resizeView:(id)sender {
   
-  NSLog(@"center point: %@", NSStringFromCGPoint(self.customView.center));
+//  NSLog(@"center point: %@", NSStringFromCGPoint(self.customView.center));
+//  
+//  origFrame  = self.customView.frame;
+//  origCenter = self.customView.center;
+//  
+//  [UIView animateWithDuration:2.0 
+//                   animations:^ {
+//                     
+//                     self.customView.frame       = CGRectMake(self.containerSubview.frame.origin.x, self.containerSubview.frame.origin.y, 200, 300);
+//                     self.containerSubview.alpha = 0.2;
+//                     self.customView.transform   = CGAffineTransformConcat(CGAffineTransformMakeRotation(M_PI / 2), CGAffineTransformMakeScale(1.5, 1.5));
+//                     self.customView.center      = self.containerSubview.center;
+//                   } 
+//                   completion:^(BOOL finished) {
+//                     NSLog(@"center point: %@", NSStringFromCGPoint(self.customView.center));
+//                   }
+//   ];
   
-  origFrame  = self.customView.frame;
-  origCenter = self.customView.center;
   
-  [UIView animateWithDuration:2.0 
-                   animations:^ {
+  
+  // Set up fade out effect
+  CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+  
+  [fadeOutAnimation setToValue:[NSNumber numberWithFloat:0.3]];
+  fadeOutAnimation.fillMode            = kCAFillModeForwards;
+  fadeOutAnimation.removedOnCompletion = NO;
+  
+  // Set up scaling
+  CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
+  
+  [resizeAnimation setToValue:[NSValue valueWithCGSize:CGSizeMake(200, 300)]];
+  resizeAnimation.fillMode            = kCAFillModeForwards;
+  resizeAnimation.removedOnCompletion = NO;
+  
+  // Set up path movement
+  CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+  pathAnimation.calculationMode      = kCAAnimationPaced;
+  pathAnimation.fillMode             = kCAFillModeForwards;
+  pathAnimation.removedOnCompletion  = NO;
+  
+  CGPoint endPoint            = self.containerSubview.center;
+  CGMutablePathRef curvedPath = CGPathCreateMutable();
+  
+  CGPathMoveToPoint(curvedPath, NULL, self.customView.frame.origin.x, self.customView.frame.origin.y);
+  CGPathAddCurveToPoint(curvedPath, NULL, endPoint.x, self.customView.frame.origin.y, endPoint.x, self.customView.frame.origin.y, endPoint.x, endPoint.y);
+  
+  pathAnimation.path = curvedPath;
+  
+  CGPathRelease(curvedPath);
+  
+  CAAnimationGroup *group = [CAAnimationGroup animation]; 
+  
+  [group setAnimations:[NSArray arrayWithObjects:fadeOutAnimation, pathAnimation, resizeAnimation, nil]];
+  group.fillMode            = kCAFillModeForwards;
+  group.removedOnCompletion = NO;
+  group.duration            = 2.0f;
+  group.delegate            = self;
 
-                     CGRect viewFrame;
-
-                     viewFrame = CGRectMake(self.containerSubview.frame.origin.x, self.containerSubview.frame.origin.x, 200, 300);
-                     self.customView.frame       = viewFrame;
-                     self.containerSubview.alpha = 0.2;
-                     self.customView.center      = self.containerSubview.center;
-                     self.customView.transform   = CGAffineTransformMakeRotation(M_PI / 2);
-                   } 
-                   completion:^(BOOL finished) {
-                     NSLog(@"center point: %@", NSStringFromCGPoint(self.customView.center));
-                   }
-   ];
+  [group setValue:self.customView forKey:@"imageViewBeingAnimated"];
+  
+  [self.customView.layer addAnimation:group forKey:@"savingAnimation"];
 }
 
 - (IBAction)origView:(id)sender {
   
   [UIView animateWithDuration:2.0 
                    animations:^ {
-                     self.customView.frame     = origFrame;
-                     self.customView.transform = CGAffineTransformIdentity;
+                     self.customView.frame       = origFrame;
+                     self.customView.transform   = CGAffineTransformIdentity;
+                     self.containerSubview.alpha = 1.0;
                    } 
                    completion:^(BOOL finished) {
                      
