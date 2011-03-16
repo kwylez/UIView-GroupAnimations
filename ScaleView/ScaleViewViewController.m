@@ -88,14 +88,15 @@ static inline double radians(float degrees) {
 //                   }
 //   ];
   
-  
-  
+
   // Set up fade out effect
+  /*
   CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
   
   [fadeOutAnimation setToValue:[NSNumber numberWithFloat:0.3]];
   fadeOutAnimation.fillMode            = kCAFillModeForwards;
   fadeOutAnimation.removedOnCompletion = NO;
+  */
   
   // Set up scaling
   CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
@@ -105,24 +106,32 @@ static inline double radians(float degrees) {
   resizeAnimation.removedOnCompletion = NO;
   
   // Set up path movement
-  CAKeyframeAnimation *pathAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-  pathAnimation.calculationMode      = kCAAnimationPaced;
-  pathAnimation.fillMode             = kCAFillModeForwards;
-  pathAnimation.removedOnCompletion  = NO;
+  UIBezierPath *movePath = [UIBezierPath bezierPath];
+  CGPoint ctlPoint       = CGPointMake(self.customView.center.x, self.customView.center.y);
   
-  CGPoint endPoint            = self.containerSubview.center;
-  CGMutablePathRef curvedPath = CGPathCreateMutable();
+  [movePath moveToPoint:self.customView.center];
+  [movePath addQuadCurveToPoint:self.containerSubview.center
+                   controlPoint:ctlPoint];
+
+  CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
   
-  CGPathMoveToPoint(curvedPath, NULL, self.customView.frame.origin.x, self.customView.frame.origin.y);
-  CGPathAddCurveToPoint(curvedPath, NULL, endPoint.x, self.customView.frame.origin.y, endPoint.x, self.customView.frame.origin.y, endPoint.x, endPoint.y);
+  moveAnim.path                = movePath.CGPath;
+  moveAnim.removedOnCompletion = YES;
   
-  pathAnimation.path = curvedPath;
+  // Setup rotation
+  CABasicAnimation* rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+  CATransform3D transform     = CATransform3DMakeRotation(0, 0, 0, 1);
   
-  CGPathRelease(curvedPath);
+  rotateAnimation.toValue             = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(DegreesToRadians(90), 0, 0, 1)];
+  rotateAnimation.fromValue           = [NSValue valueWithCATransform3D:transform];
+  rotateAnimation.duration            = 2;
+  rotateAnimation.fillMode            = kCAFillModeForwards;
+  rotateAnimation.removedOnCompletion = NO;
   
   CAAnimationGroup *group = [CAAnimationGroup animation]; 
   
-  [group setAnimations:[NSArray arrayWithObjects:fadeOutAnimation, pathAnimation, resizeAnimation, nil]];
+  [group setAnimations:[NSArray arrayWithObjects:moveAnim, rotateAnimation, resizeAnimation, nil]];
+  
   group.fillMode            = kCAFillModeForwards;
   group.removedOnCompletion = NO;
   group.duration            = 2.0f;
@@ -149,6 +158,24 @@ static inline double radians(float degrees) {
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
   return YES;
+}
+
+#pragma - CAAnimationGroup Delegate Methods
+
+- (void)animationDidStart:(CAAnimation *)anim {
+  
+  [UIView animateWithDuration:2.0 
+                   animations:^ {
+                     self.containerSubview.alpha = 0.2;
+                   } 
+                   completion:^(BOOL finished) {
+                     NSLog(@"center point: %@", NSStringFromCGPoint(self.customView.center));
+                   }
+   ];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+  
 }
 
 @end
