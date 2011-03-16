@@ -1,0 +1,317 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EA39814C12DF8C9200066D34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA39814B12DF8C9200066D34 /* QuartzCore.framework */; };
+		EA39815012DF8D5900066D34 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA39814F12DF8D5900066D34 /* CustomView.m */; };
+		EA3A295A12DCE7BA00245B1D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3A295912DCE7BA00245B1D /* UIKit.framework */; };
+		EA3A295C12DCE7BA00245B1D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3A295B12DCE7BA00245B1D /* Foundation.framework */; };
+		EA3A295E12DCE7BA00245B1D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA3A295D12DCE7BA00245B1D /* CoreGraphics.framework */; };
+		EA3A296412DCE7BA00245B1D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA3A296212DCE7BA00245B1D /* InfoPlist.strings */; };
+		EA3A296712DCE7BA00245B1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A296612DCE7BA00245B1D /* main.m */; };
+		EA3A296A12DCE7BA00245B1D /* ScaleViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A296912DCE7BA00245B1D /* ScaleViewAppDelegate.m */; };
+		EA3A296D12DCE7BB00245B1D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3A296B12DCE7BB00245B1D /* MainWindow.xib */; };
+		EA3A297012DCE7BB00245B1D /* ScaleViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3A296F12DCE7BB00245B1D /* ScaleViewViewController.m */; };
+		EA3A297312DCE7BB00245B1D /* ScaleViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3A297112DCE7BB00245B1D /* ScaleViewViewController.xib */; };
+		EA74919D12E4AB5800D8BC3D /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA74919B12E4AB5800D8BC3D /* MainWindow-iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		EA39814B12DF8C9200066D34 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		EA39814E12DF8D5900066D34 /* CustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
+		EA39814F12DF8D5900066D34 /* CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
+		EA3A295512DCE7BA00245B1D /* ScaleView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScaleView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA3A295912DCE7BA00245B1D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EA3A295B12DCE7BA00245B1D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EA3A295D12DCE7BA00245B1D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EA3A296112DCE7BA00245B1D /* ScaleView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ScaleView-Info.plist"; sourceTree = "<group>"; };
+		EA3A296312DCE7BA00245B1D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EA3A296512DCE7BA00245B1D /* ScaleView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ScaleView-Prefix.pch"; sourceTree = "<group>"; };
+		EA3A296612DCE7BA00245B1D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EA3A296812DCE7BA00245B1D /* ScaleViewAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScaleViewAppDelegate.h; sourceTree = "<group>"; };
+		EA3A296912DCE7BA00245B1D /* ScaleViewAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScaleViewAppDelegate.m; sourceTree = "<group>"; };
+		EA3A296C12DCE7BB00245B1D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		EA3A296E12DCE7BB00245B1D /* ScaleViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScaleViewViewController.h; sourceTree = "<group>"; };
+		EA3A296F12DCE7BB00245B1D /* ScaleViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScaleViewViewController.m; sourceTree = "<group>"; };
+		EA3A297212DCE7BB00245B1D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ScaleViewViewController.xib; sourceTree = "<group>"; };
+		EA74919C12E4AB5800D8BC3D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EA3A295212DCE7BA00245B1D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA39814C12DF8C9200066D34 /* QuartzCore.framework in Frameworks */,
+				EA3A295A12DCE7BA00245B1D /* UIKit.framework in Frameworks */,
+				EA3A295C12DCE7BA00245B1D /* Foundation.framework in Frameworks */,
+				EA3A295E12DCE7BA00245B1D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EA3A294A12DCE7BA00245B1D = {
+			isa = PBXGroup;
+			children = (
+				EA3A295F12DCE7BA00245B1D /* ScaleView */,
+				EA3A295812DCE7BA00245B1D /* Frameworks */,
+				EA3A295612DCE7BA00245B1D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EA3A295612DCE7BA00245B1D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA3A295512DCE7BA00245B1D /* ScaleView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA3A295812DCE7BA00245B1D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA39814B12DF8C9200066D34 /* QuartzCore.framework */,
+				EA3A295912DCE7BA00245B1D /* UIKit.framework */,
+				EA3A295B12DCE7BA00245B1D /* Foundation.framework */,
+				EA3A295D12DCE7BA00245B1D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA3A295F12DCE7BA00245B1D /* ScaleView */ = {
+			isa = PBXGroup;
+			children = (
+				EA74919A12E4AB5700D8BC3D /* iPad */,
+				EA39814E12DF8D5900066D34 /* CustomView.h */,
+				EA39814F12DF8D5900066D34 /* CustomView.m */,
+				EA3A296812DCE7BA00245B1D /* ScaleViewAppDelegate.h */,
+				EA3A296912DCE7BA00245B1D /* ScaleViewAppDelegate.m */,
+				EA3A296B12DCE7BB00245B1D /* MainWindow.xib */,
+				EA3A296E12DCE7BB00245B1D /* ScaleViewViewController.h */,
+				EA3A296F12DCE7BB00245B1D /* ScaleViewViewController.m */,
+				EA3A297112DCE7BB00245B1D /* ScaleViewViewController.xib */,
+				EA3A296012DCE7BA00245B1D /* Supporting Files */,
+			);
+			path = ScaleView;
+			sourceTree = "<group>";
+		};
+		EA3A296012DCE7BA00245B1D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EA3A296112DCE7BA00245B1D /* ScaleView-Info.plist */,
+				EA3A296212DCE7BA00245B1D /* InfoPlist.strings */,
+				EA3A296512DCE7BA00245B1D /* ScaleView-Prefix.pch */,
+				EA3A296612DCE7BA00245B1D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA74919A12E4AB5700D8BC3D /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				EA74919B12E4AB5800D8BC3D /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EA3A295412DCE7BA00245B1D /* ScaleView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA3A297612DCE7BB00245B1D /* Build configuration list for PBXNativeTarget "ScaleView" */;
+			buildPhases = (
+				EA3A295112DCE7BA00245B1D /* Sources */,
+				EA3A295212DCE7BA00245B1D /* Frameworks */,
+				EA3A295312DCE7BA00245B1D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScaleView;
+			productName = ScaleView;
+			productReference = EA3A295512DCE7BA00245B1D /* ScaleView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EA3A294C12DCE7BA00245B1D /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = EA3A294F12DCE7BA00245B1D /* Build configuration list for PBXProject "ScaleView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EA3A294A12DCE7BA00245B1D;
+			productRefGroup = EA3A295612DCE7BA00245B1D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EA3A295412DCE7BA00245B1D /* ScaleView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EA3A295312DCE7BA00245B1D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA3A296412DCE7BA00245B1D /* InfoPlist.strings in Resources */,
+				EA3A296D12DCE7BB00245B1D /* MainWindow.xib in Resources */,
+				EA3A297312DCE7BB00245B1D /* ScaleViewViewController.xib in Resources */,
+				EA74919D12E4AB5800D8BC3D /* MainWindow-iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EA3A295112DCE7BA00245B1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA3A296712DCE7BA00245B1D /* main.m in Sources */,
+				EA3A296A12DCE7BA00245B1D /* ScaleViewAppDelegate.m in Sources */,
+				EA3A297012DCE7BB00245B1D /* ScaleViewViewController.m in Sources */,
+				EA39815012DF8D5900066D34 /* CustomView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EA3A296212DCE7BA00245B1D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA3A296312DCE7BA00245B1D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EA3A296B12DCE7BB00245B1D /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA3A296C12DCE7BB00245B1D /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		EA3A297112DCE7BB00245B1D /* ScaleViewViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA3A297212DCE7BB00245B1D /* en */,
+			);
+			name = ScaleViewViewController.xib;
+			sourceTree = "<group>";
+		};
+		EA74919B12E4AB5800D8BC3D /* MainWindow-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA74919C12E4AB5800D8BC3D /* en */,
+			);
+			name = "MainWindow-iPad.xib";
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EA3A297412DCE7BB00245B1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		EA3A297512DCE7BB00245B1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		EA3A297712DCE7BB00245B1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ScaleView/ScaleView-Prefix.pch";
+				INFOPLIST_FILE = "ScaleView/ScaleView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EA3A297812DCE7BB00245B1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ScaleView/ScaleView-Prefix.pch";
+				INFOPLIST_FILE = "ScaleView/ScaleView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EA3A294F12DCE7BA00245B1D /* Build configuration list for PBXProject "ScaleView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA3A297412DCE7BB00245B1D /* Debug */,
+				EA3A297512DCE7BB00245B1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA3A297612DCE7BB00245B1D /* Build configuration list for PBXNativeTarget "ScaleView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA3A297712DCE7BB00245B1D /* Debug */,
+				EA3A297812DCE7BB00245B1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EA3A294C12DCE7BA00245B1D /* Project object */;
+}
