@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomView.h"
+#define DegreesToRadians(angle) ((angle / 180.0) * M_PI)
 
 @interface ScaleViewViewController : UIViewController {
 
