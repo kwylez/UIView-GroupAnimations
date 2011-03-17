@@ -10,7 +10,6 @@
 #import "QuartzCore/QuartzCore.h"
 
 static inline double radians(float degrees) {
-  
   return (degrees * M_PI) / 180.0;
 }
 
@@ -50,6 +49,7 @@ static inline double radians(float degrees) {
   [self.view addSubview:self.containerSubview];
   
   self.customView = [[CustomView alloc] initWithFrame:CGRectMake(176.0, 258.0, 72.0, 96.0)];
+  
   self.customView.alpha = 1.0;
   
   [self.view addSubview:self.customView];
@@ -69,43 +69,22 @@ static inline double radians(float degrees) {
 }
 
 - (IBAction)resizeView:(id)sender {
-  
-//  NSLog(@"center point: %@", NSStringFromCGPoint(self.customView.center));
-//  
-//  origFrame  = self.customView.frame;
-//  origCenter = self.customView.center;
-//  
-//  [UIView animateWithDuration:2.0 
-//                   animations:^ {
-//                     
-//                     self.customView.frame       = CGRectMake(self.containerSubview.frame.origin.x, self.containerSubview.frame.origin.y, 200, 300);
-//                     self.containerSubview.alpha = 0.2;
-//                     self.customView.transform   = CGAffineTransformConcat(CGAffineTransformMakeRotation(M_PI / 2), CGAffineTransformMakeScale(1.5, 1.5));
-//                     self.customView.center      = self.containerSubview.center;
-//                   } 
-//                   completion:^(BOOL finished) {
-//                     NSLog(@"center point: %@", NSStringFromCGPoint(self.customView.center));
-//                   }
-//   ];
-  
 
-  // Set up fade out effect
-  /*
-  CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-  
-  [fadeOutAnimation setToValue:[NSNumber numberWithFloat:0.3]];
-  fadeOutAnimation.fillMode            = kCAFillModeForwards;
-  fadeOutAnimation.removedOnCompletion = NO;
-  */
-  
-  // Set up scaling
+  origFrame  = self.customView.frame;
+  origCenter = self.customView.center;
+
+  /**
+   * Set up scaling
+   */
   CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
   
-  [resizeAnimation setToValue:[NSValue valueWithCGSize:CGSizeMake(200, 300)]];
+  [resizeAnimation setToValue:[NSValue valueWithCGSize:CGSizeMake(300, 450)]];
   resizeAnimation.fillMode            = kCAFillModeForwards;
   resizeAnimation.removedOnCompletion = NO;
   
-  // Set up path movement
+  /**
+   * Set up path movement
+   */
   UIBezierPath *movePath = [UIBezierPath bezierPath];
   CGPoint ctlPoint       = CGPointMake(self.customView.center.x, self.customView.center.y);
   
@@ -118,16 +97,22 @@ static inline double radians(float degrees) {
   moveAnim.path                = movePath.CGPath;
   moveAnim.removedOnCompletion = YES;
   
-  // Setup rotation
+  /**
+   * Setup rotation animation
+   */
   CABasicAnimation* rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
-  CATransform3D transform     = CATransform3DMakeRotation(0, 0, 0, 1);
+  CATransform3D fromTransform       = CATransform3DMakeRotation(0, 0, 0, 1);
+  CATransform3D toTransform         = CATransform3DMakeRotation(radians(90), 0, 0, 1);
   
-  rotateAnimation.toValue             = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(DegreesToRadians(90), 0, 0, 1)];
-  rotateAnimation.fromValue           = [NSValue valueWithCATransform3D:transform];
+  rotateAnimation.toValue             = [NSValue valueWithCATransform3D:toTransform];
+  rotateAnimation.fromValue           = [NSValue valueWithCATransform3D:fromTransform];
   rotateAnimation.duration            = 2;
   rotateAnimation.fillMode            = kCAFillModeForwards;
   rotateAnimation.removedOnCompletion = NO;
   
+  /**
+   * Setup and add all animations to the group
+   */
   CAAnimationGroup *group = [CAAnimationGroup animation]; 
   
   [group setAnimations:[NSArray arrayWithObjects:moveAnim, rotateAnimation, resizeAnimation, nil]];
@@ -139,21 +124,63 @@ static inline double radians(float degrees) {
 
   [group setValue:self.customView forKey:@"imageViewBeingAnimated"];
   
+  /**
+   * ...and go
+   */
   [self.customView.layer addAnimation:group forKey:@"savingAnimation"];
 }
 
 - (IBAction)origView:(id)sender {
   
-  [UIView animateWithDuration:2.0 
-                   animations:^ {
-                     self.customView.frame       = origFrame;
-                     self.customView.transform   = CGAffineTransformIdentity;
-                     self.containerSubview.alpha = 1.0;
-                   } 
-                   completion:^(BOOL finished) {
-                     
-                   }
-   ];
+  /**
+   * Set the scaling animation
+   */
+	CABasicAnimation *scaling = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
+	
+  scaling.fromValue           = [[self.customView.layer presentationLayer] valueForKeyPath:@"bounds.size"];
+	scaling.toValue             = [NSValue valueWithCGSize:origFrame.size];
+	scaling.removedOnCompletion = NO;
+	scaling.fillMode            = kCAFillModeForwards;  
+  
+  /**
+   * Set the rotating animation
+   */ 
+	CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform"];;
+  CATransform3D toTransform  = CATransform3DMakeRotation(0, 0, 0, 1);
+
+	rotation.fromValue           = [[self.customView.layer presentationLayer] valueForKeyPath:@"transform"];
+	rotation.toValue             = [NSValue valueWithCATransform3D:toTransform];
+	rotation.removedOnCompletion = NO;
+	rotation.fillMode            = kCAFillModeForwards;
+	rotation.duration            = 2.0;
+  
+  /**
+   * Set up path movement
+   */
+  UIBezierPath *movePath = [UIBezierPath bezierPath];
+  CGPoint ctlPoint       = CGPointMake(self.customView.center.x, self.customView.center.y);
+  
+  [movePath moveToPoint:self.containerSubview.center];
+  [movePath addQuadCurveToPoint:origCenter controlPoint:ctlPoint];
+  
+  CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+  
+  moveAnim.path                = movePath.CGPath;
+  moveAnim.removedOnCompletion = YES;
+
+  /**
+   * Set the group animation for both transformations to be applied at the same time
+   */
+	CAAnimationGroup *animation   = [CAAnimationGroup animation];
+	animation.removedOnCompletion = NO;
+	animation.autoreverses        = NO;
+	animation.fillMode            = kCAFillModeForwards;
+	animation.duration            = 2.0;
+	animation.animations          = [NSArray arrayWithObjects:scaling, moveAnim, rotation, nil];
+  
+  [animation setValue:self.customView forKey:@"imageViewBeingAnimated"];
+  
+	[self.customView.layer addAnimation:animation forKey:@"animateLayer"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
