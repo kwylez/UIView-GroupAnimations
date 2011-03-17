@@ -89,8 +89,7 @@ static inline double radians(float degrees) {
   CGPoint ctlPoint       = CGPointMake(self.customView.center.x, self.customView.center.y);
   
   [movePath moveToPoint:self.customView.center];
-  [movePath addQuadCurveToPoint:self.containerSubview.center
-                   controlPoint:ctlPoint];
+  [movePath addQuadCurveToPoint:self.containerSubview.center controlPoint:ctlPoint];
 
   CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
   
