@@ -76,7 +76,7 @@ static inline double radians(float degrees) {
   /**
    * Set up scaling
    */
-  CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
+  CABasicAnimation *resizeAnimation = [CABasicAnimation animationWithKeyPath:kResizeKey];
   
   [resizeAnimation setToValue:[NSValue valueWithCGSize:CGSizeMake(300, 450)]];
   resizeAnimation.fillMode            = kCAFillModeForwards;
@@ -91,7 +91,7 @@ static inline double radians(float degrees) {
   [movePath moveToPoint:self.customView.center];
   [movePath addQuadCurveToPoint:self.containerSubview.center controlPoint:ctlPoint];
 
-  CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+  CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:kPathMovement];
   
   moveAnim.path                = movePath.CGPath;
   moveAnim.removedOnCompletion = YES;
@@ -99,7 +99,7 @@ static inline double radians(float degrees) {
   /**
    * Setup rotation animation
    */
-  CABasicAnimation* rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+  CABasicAnimation* rotateAnimation = [CABasicAnimation animationWithKeyPath:kRotation];
   CATransform3D fromTransform       = CATransform3DMakeRotation(0, 0, 0, 1);
   CATransform3D toTransform         = CATransform3DMakeRotation(radians(90), 0, 0, 1);
   
@@ -121,12 +121,12 @@ static inline double radians(float degrees) {
   group.duration            = 2.0f;
   group.delegate            = self;
 
-  [group setValue:self.customView forKey:@"imageViewBeingAnimated"];
+  [group setValue:self.customView forKey:kGroupAnimation];
   
   /**
    * ...and go
    */
-  [self.customView.layer addAnimation:group forKey:@"savingAnimation"];
+  [self.customView.layer addAnimation:group forKey:kLayerAnimation];
 }
 
 - (IBAction)origView:(id)sender {
@@ -134,9 +134,9 @@ static inline double radians(float degrees) {
   /**
    * Set the scaling animation
    */
-	CABasicAnimation *scaling = [CABasicAnimation animationWithKeyPath:@"bounds.size"];
+	CABasicAnimation *scaling = [CABasicAnimation animationWithKeyPath:kResizeKey];
 	
-  scaling.fromValue           = [[self.customView.layer presentationLayer] valueForKeyPath:@"bounds.size"];
+  scaling.fromValue           = [[self.customView.layer presentationLayer] valueForKeyPath:kResizeKey];
 	scaling.toValue             = [NSValue valueWithCGSize:origFrame.size];
 	scaling.removedOnCompletion = NO;
 	scaling.fillMode            = kCAFillModeForwards;  
@@ -144,10 +144,10 @@ static inline double radians(float degrees) {
   /**
    * Set the rotating animation
    */ 
-	CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform"];;
+	CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:kRotation];;
   CATransform3D toTransform  = CATransform3DMakeRotation(0, 0, 0, 1);
 
-	rotation.fromValue           = [[self.customView.layer presentationLayer] valueForKeyPath:@"transform"];
+	rotation.fromValue           = [[self.customView.layer presentationLayer] valueForKeyPath:kRotation];
 	rotation.toValue             = [NSValue valueWithCATransform3D:toTransform];
 	rotation.removedOnCompletion = NO;
 	rotation.fillMode            = kCAFillModeForwards;
@@ -162,7 +162,7 @@ static inline double radians(float degrees) {
   [movePath moveToPoint:self.containerSubview.center];
   [movePath addQuadCurveToPoint:origCenter controlPoint:ctlPoint];
   
-  CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+  CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:kPathMovement];
   
   moveAnim.path                = movePath.CGPath;
   moveAnim.removedOnCompletion = YES;
@@ -177,9 +177,9 @@ static inline double radians(float degrees) {
 	animation.duration            = 2.0;
 	animation.animations          = [NSArray arrayWithObjects:scaling, moveAnim, rotation, nil];
   
-  [animation setValue:self.customView forKey:@"imageViewBeingAnimated"];
+  [animation setValue:self.customView forKey:kGroupAnimation];
   
-	[self.customView.layer addAnimation:animation forKey:@"animateLayer"];
+	[self.customView.layer addAnimation:animation forKey:kLayerAnimation];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

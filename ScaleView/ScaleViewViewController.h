@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "CustomView.h"
 
+#define kResizeKey @"bounds.size"
+#define kPathMovement @"position"
+#define kRotation @"transform"
+#define kGroupAnimation @"subviewBeingAnimated"
+#define kLayerAnimation @"animateLayer"
+
 @interface ScaleViewViewController : UIViewController {
 
   CustomView *customView;
